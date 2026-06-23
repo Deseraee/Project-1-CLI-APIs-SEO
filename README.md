@@ -1,4 +1,4 @@
-# Project-1-CLI-APIs-SEO
+# Project-1
 
 ## What It Does
 
