@@ -1,0 +1,4 @@
+.env
+__pycache__/
+outsafe.db
+.pytest_cache/
