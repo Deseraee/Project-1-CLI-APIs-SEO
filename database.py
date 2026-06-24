@@ -1,10 +1,10 @@
 import sqlite3
 import requests
 import os
-import dotenv import load_dotenv
+from dotenv import load_dotenv
 
 load_dotenv()
-API_KEY = os.getenv("OPENWEATHER_API_KEY")
+OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
 
 connection = sqlite3.connect("mydatabase.db")
 curr = connection.cursor()
