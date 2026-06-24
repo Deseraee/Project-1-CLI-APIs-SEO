@@ -3,10 +3,12 @@ import requests
 import sqlite3
 import os
 from dotenv import load_dotenv
+#from database.py import database.py
 
 load_dotenv()
 OPENUV_API_KEY = os.getenv("OPENUV_API_KEY")
 OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
+AQICN_API_KEY = os.getenv("AQICN_API_KEY")
 
 connection = sqlite3.connect("mydatabase.db")
 curr = connection.cursor()
@@ -32,7 +34,10 @@ respond = requests.get(temp_url)
 temp_d = respond.json()
 temp = temp_d['main']['temp']
 
-aqi = 50 
+aqi_url = f"https://api.waqi.info/feed/geo:{lat};{lon}/?token={AQICN_API_KEY}"
+respond = requests.get(aqi_url)
+aqi_data = respond.json()
+aqi = aqi_data['data'] ['aqi']
 
 def get_recommendation(activity, temp, aqi, uv):
     activity = activity.lower()
