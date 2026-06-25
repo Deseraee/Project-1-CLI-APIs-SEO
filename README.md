@@ -13,10 +13,11 @@ To help golfers avoid potential health issues, such as sunburn or heat exposure,
 
  **APIs**: 
 All free and open-source:
-- WeatherAPI
-- Open UV
-- Airqauilty 
+- OpenWeather API
+- OpenUV
+- Air Quality Open API
+- Claude API
 
 
 **Database**: 
-- in progress 
+- Saves weather report 
