@@ -18,15 +18,6 @@ curr.execute(
   (username,name,location)
 )
 
-
-#if the username is already in the databse it ask the user if their location
-# is the current one assoicated with the username 
-# yes - same user
-#no new user and tell me that username is already taken
-#if username in databse:
- # reply = input("Is your location {location} ? yes or no: ")
-  #curr.execute("INSERT INTO usersInfo")
-
 url = f"https://api.openweathermap.org/data/2.5/weather?q={location}&appid={OPENWEATHER_API_KEY}&units=metric"
 respond = requests.get(url)
 location_weather = respond.json()
