@@ -2,20 +2,21 @@
 
 ## What It Does
 
-The user will choose an outdoor activity and then receive a response notifying them of relevant conditions, such as "caution, avoid, safe," and "UV rating," and "air quality."
+The user enters their location and receives a report on current golfing conditions, including a verdict (Good, Caution, or Avoid), the UV index, and air quality.
 
 
 ## Who it benefits
-Student athletes who are constanlty outdoors 
+Golfers 
 
 ## Why
-To avoid poteinality health issues such as sunburns, and more
+To help golfers avoid potential health issues, such as sunburn or heat exposure, and to inform them of the best time to golf and how long they can safely stay out. 
 
  **APIs**: 
-All of them are open-source and free
-- Weather
-- OpenMaps
+All free and open-source:
+- WeatherAPI
+- Open UV
+- Airqauilty 
 
 
 **Database**: 
-Will store user activites throughout the week 
+- in progress 
