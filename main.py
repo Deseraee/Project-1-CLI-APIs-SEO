@@ -1,7 +1,7 @@
 # main.py - OutSafe CLI
 
 from weather_api import get_coordinates, get_weather, get_uv, get_aqi, get_forecast
-from recommender import get_recommendation
+from recommender import get_recommendation, check_state_input, check_time
 from database import user_report
 
 
@@ -43,6 +43,10 @@ while True:
         if username == "" or city == "" or state == "" or time == "" or vehicle == "" :
             print("Username, City, State, Time and Vehicle cannot be blank.")
             continue
+
+        if not check_state_input(state):
+          print("Please enter a 2-letter abbreviation, like OH")
+          continue
         try:
           time = float(time)
         except ValueError:
@@ -72,6 +76,10 @@ while True:
             aqi = get_aqi(lat, lon)
 
             forecast_time, forecast_temp, forecast_description = get_forecast(location)
+
+            if not check_time(forecast_time):
+              print("Forecast time is outside the allowed window. Try again later")
+              continue
 
             verdict, reasons = get_recommendation(activity, temp, aqi, uv, time, vehicle)
 

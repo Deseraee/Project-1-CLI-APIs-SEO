@@ -77,3 +77,15 @@ def get_recommendation(activity, temp, aqi, uv, time, vehicle):
         verdict = "AVOID"
 
     return verdict, reasons
+
+def check_state_input(state):
+  return len(state) == 2 and state.isalpha()
+
+def check_time(forecast_time, cutoff=1):
+  hour = int(forecast_time[11:13])
+  if hour < cutoff:
+    return True 
+  elif hour >=12:
+    return True
+  else:
+    return False
