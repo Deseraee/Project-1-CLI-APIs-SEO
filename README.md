@@ -16,7 +16,6 @@ All free and open-source:
 - OpenWeather API
 - OpenUV
 - Air Quality Open API
-- Claude API
 
 
 **Database**: 
