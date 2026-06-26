@@ -5,32 +5,27 @@ from dotenv import load_dotenv
 
 load_dotenv()
 OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
+def user_report(username, location, activity, temp, description, humidity, aqi, uv, verdict, reasons, forecast_time, forecast_temp, forecast_description):
+  connection = sqlite3.connect("mydatabase.db")
+  curr = connection.cursor()
+  curr.execute(
+    "INSERT INTO WeatherReport (username, location, activity, current_temperature, current_weather, humidity, aqi, uv_index, verdict, reasons, forecast_time, forecast_temperature, forecast_weather) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    (
+      username,
+      location,
+      activity,
+      temp,
+      description,
+      humidity,
+      aqi,
+      uv,
+      verdict,
+      "; ".join(reasons),
+      forecast_time,
+      forecast_temp,
+      forecast_description
+    ))
 
-connection = sqlite3.connect("mydatabase.db")
-curr = connection.cursor()
-
-username = input("Enter your username: ")
-name = input("Enter your name: ")
-location = input("Enter your location: ")
-
-curr.execute(
-  "INSERT INTO usersInfo (username, name, location) VALUES (?, ?, ?)",
-  (username,name,location)
-)
-
-url = f"https://api.openweathermap.org/data/2.5/weather?q={location}&appid={OPENWEATHER_API_KEY}&units=metric"
-respond = requests.get(url)
-location_weather = respond.json()
-
-if respond.status_code == 200:
-  temperature = location_weather["main"]["temp"]
-  description = location_weather["weather"][0]["description"]
-  humidity = location_weather["main"]["humidity"] 
-  
-  print(f"The weather in your location is {temperature}°C, with {description}, and a humidity of {humidity}%")
-
-
-
-connection.commit()
-connection.close()
+  connection.commit()
+  connection.close()
 

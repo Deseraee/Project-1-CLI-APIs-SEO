@@ -2,6 +2,7 @@
 
 from weather_api import get_coordinates, get_weather, get_uv, get_aqi, get_forecast
 from recommender import get_recommendation
+from database import user_report
 
 
 def choose_activity():
@@ -33,14 +34,16 @@ while True:
     menu_choice = input("Choose an option: ")
 
     if menu_choice == "1":
+        username = input("\nEnter your username: ")
         city = input("\nEnter your city: ")
         state = input("Enter your state abbreviation, like OH or GA: ")
 
+        username = username.strip()
         city = city.strip()
         state = state.strip().upper()
 
-        if city == "" or state == "":
-            print("City and state cannot be blank.")
+        if username == "" or city == "" or state == "":
+            print("Username, City and state cannot be blank.")
             continue
 
         location = city + "," + state + ",US"
@@ -84,6 +87,8 @@ while True:
             print("Time:", forecast_time)
             print("Temperature:", round(forecast_temp, 1), "°F")
             print("Weather:", forecast_description)
+
+            user_report(username, display_location, activity, temp, description, humidity, aqi, uv, verdict, reasons, forecast_time, forecast_temp, forecast_description)
 
         except Exception as error:
             print("\nSomething went wrong.")
