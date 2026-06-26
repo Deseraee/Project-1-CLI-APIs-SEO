@@ -9,8 +9,6 @@ def choose_activity():
     print("\nPick activity:")
     print("1. Golf")
     print("2. Walk")
-    print("3. Run")
-    print("4. Bike")
 
     choice = input("Choice: ")
 
@@ -18,10 +16,6 @@ def choose_activity():
         return "golf"
     elif choice == "2":
         return "walk"
-    elif choice == "3":
-        return "run"
-    elif choice == "4":
-        return "bike"
     else:
         return None
 
@@ -37,14 +31,27 @@ while True:
         username = input("\nEnter your username: ")
         city = input("\nEnter your city: ")
         state = input("Enter your state abbreviation, like OH or GA: ")
+        time = input("Enter the amount of hours you will be playing for: ")
+        vehicle = input("Will you be using a vehicle (y/n)?: ")
 
         username = username.strip()
         city = city.strip()
         state = state.strip().upper()
+        time = time.strip()
+        vehicle = vehicle.strip().lower()
 
-        if username == "" or city == "" or state == "":
-            print("Username, City and state cannot be blank.")
+        if username == "" or city == "" or state == "" or time == "" or vehicle == "" :
+            print("Username, City, State, Time and Vehicle cannot be blank.")
             continue
+        try:
+          time = float(time)
+        except ValueError:
+          print("Time must be a number")
+          continue
+        
+        if vehicle not in ("y", "n"):
+          print("Vehicle must be 'y' or 'n'")
+          continue
 
         location = city + "," + state + ",US"
         display_location = city + ", " + state
@@ -66,7 +73,7 @@ while True:
 
             forecast_time, forecast_temp, forecast_description = get_forecast(location)
 
-            verdict, reasons = get_recommendation(activity, temp, aqi, uv)
+            verdict, reasons = get_recommendation(activity, temp, aqi, uv, time, vehicle)
 
             print("\nOutSafe Report")
             print("--------------------")
@@ -88,7 +95,7 @@ while True:
             print("Temperature:", round(forecast_temp, 1), "°F")
             print("Weather:", forecast_description)
 
-            user_report(username, display_location, activity, temp, description, humidity, aqi, uv, verdict, reasons, forecast_time, forecast_temp, forecast_description)
+            user_report(username, display_location, activity, temp, description, humidity, aqi, uv, verdict, reasons, forecast_time, forecast_temp, forecast_description,time, vehicle)
 
         except Exception as error:
             print("\nSomething went wrong.")

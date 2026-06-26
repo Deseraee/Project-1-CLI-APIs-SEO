@@ -20,4 +20,4 @@ All free and open-source:
 
 
 **Database**: 
-- Saves weather report 
+- Save User's weather report 

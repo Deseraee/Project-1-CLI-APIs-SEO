@@ -1,7 +1,8 @@
 # recommender.py - decides if an outdoor activity is safe
 
-def get_recommendation(activity, temp, aqi, uv):
+def get_recommendation(activity, temp, aqi, uv, time, vehicle):
     activity = activity.lower()
+    vehicle = vehicle.lower()
 
     score = 0
     reasons = []
@@ -41,6 +42,28 @@ def get_recommendation(activity, temp, aqi, uv):
     if activity == "run" and aqi >= 100:
         score += 1
         reasons.append("Running is harder on the lungs when air quality is poor")
+
+    #Time 
+    if vehicle == 'y':
+      if time <= 2:
+        score += 1
+        reasons.append("Low risk because it is a short round with vehicle")
+      elif time <= 4:
+        score +=1
+        reasons.append("Medium risk because it is a medium round with a vehicle")
+      else:
+        score += 0
+        reasons.append("Feasible because it is a long round with a vehicle")
+    else: 
+      if time <= 2: 
+        score +=1
+        reasons.append("Acceptable risk because it is a short round with no vehicle")
+      elif time <=4:
+        score +=2
+        reasons.append("Moderate risk because it is a 2-4 hour round with no vehicle")
+      else:
+        score +=3
+        reasons.append("High risk, consider rescheduling because there is no vehicle for a long round")
 
     if not reasons:
         reasons.append("Conditions look generally safe")
